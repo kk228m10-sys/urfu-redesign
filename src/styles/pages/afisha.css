@@ -1,0 +1,31 @@
+/* Афиша: a wall of posters, the date is the headline of each */
+.poster-filter { --chip-bg: var(--paper); --chip-on: var(--ink); --chip-on-ink: var(--paper); }
+.posters { padding: 0.5rem; }
+.poster-wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
+.poster { position: relative; display: grid; align-content: start; gap: 0.75rem; min-height: 32rem; padding: clamp(1.5rem, 2.5vw, 2.25rem); container-type: inline-size; }
+.poster[hidden] { display: none; }
+.poster-has-photo { grid-row: span 2; }
+.poster-photo { margin: calc(clamp(1.5rem, 2.5vw, 2.25rem) * -1) calc(clamp(1.5rem, 2.5vw, 2.25rem) * -1) 0.5rem; aspect-ratio: 4 / 3; overflow: hidden; }
+.poster-photo img { height: 100%; }
+.poster-date { display: grid; gap: 0.25rem; }
+.poster-date .display { font-size: min(var(--step-display), 46cqi); line-height: 0.9; }
+.poster-month { font-size: var(--step-lead); font-weight: 600; }
+.poster-title { font-size: var(--step-lead); font-weight: 600; line-height: 1.25; margin-top: 0.5rem; }
+.poster-kind { font-size: var(--step-body); }
+.poster-left { font-weight: 600; }
+.poster-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: auto; padding-top: 1rem; }
+.poster-ics { --f-action: var(--ink); --f-action-ink: var(--paper); }
+.field-ink .poster-ics { --f-action: var(--paper); --f-action-ink: var(--ink); }
+.poster-more { font-weight: 500; }
+@media (hover: hover) and (pointer: fine) {
+  .poster { transition: transform var(--t-ui) var(--ease-out); }
+  .poster:hover { transform: rotate(-0.6deg); z-index: 1; }
+}
+.posters-empty { padding-block: 4rem; color: var(--paper); }
+
+@media (max-width: 64rem) { .poster-wall { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 40rem) {
+  .poster-wall { grid-template-columns: 1fr; }
+  .poster { min-height: 0; }
+  .poster-has-photo { grid-row: auto; }
+}

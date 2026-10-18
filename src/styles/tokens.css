@@ -1,0 +1,71 @@
+/* УрФУ — design tokens.
+   Direction: Loud and flat (seed 1083001879). Palette proportions from the sheet, colours from the subject:
+   paper and cast iron for the ground and ink, the UrFU red of the sign, emerald for the Urals and the
+   «Изумруд» olympiad, the yellow of the current site's buttons. One field per chapter, no tints between. */
+:root {
+  /* ground and ink */
+  --paper: #e6e0d2;
+  --paper-2: #dcd5c5;      /* one tone step for surfaces on paper */
+  --ink: #1d1d1b;          /* the black of the UrFU logo */
+  --ink-soft: #57534b;     /* secondary notes only: 5.1:1 on paper */
+
+  /* chapter fields, each with the one ink allowed on it */
+  --red: #e50046;          /* знак УрФУ */
+  --red-ink: #ffffff;
+  --green: #22c278;        /* изумруд; ink on it reads at 7.3:1 */
+  --green-ink: #1d1d1b;
+  --yellow: #fece00;       /* топаз */
+  --yellow-ink: #1d1d1b;
+  --black: #1d1d1b;
+  --black-ink: #e6e0d2;
+
+  --accent: var(--red);
+  --accent-ink: var(--red-ink);
+
+  /* the campus plan: a light printed sheet on the paper page; every building carries its own gem colour
+     (build/rooms.mjs), the passages between them are rhodonite, the pink stone of Yekaterinburg */
+  --map-ground: #eeeeea;   /* low-chroma stone, not cream */
+  --map-street: #ffffff;
+  --map-square: #e2eedd;
+  --map-lawn: #c4e3c9;
+  --map-other: #dcd5c6;
+  --map-link: #ee7a9c;
+
+  /* type: Unbounded for display, Onest for text — both carry Cyrillic */
+  --font-display: 'Unbounded Variable', 'Unbounded', 'Arial Black', system-ui, sans-serif;
+  --font-text: 'Onest Variable', 'Onest', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Eight sizes on a page at most: small, ui, body, lead, tile, head, display, giant. */
+  --step-small: 0.875rem;                                      /* 14px */
+  --step-ui: 0.9375rem;                                        /* 15px: nav, chips, slips */
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);     /* 17–19px */
+  --step-lead: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);        /* 18–22px */
+  --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);              /* 32–64px */
+  /* display = the hero headline's size: ПОЛУЧИТСЯ (8.15em) across two thirds of the page */
+  --step-display: calc(((100vw - 2 * var(--margin)) * 0.6667 - var(--gutter) / 3) / 8.15);
+  --step-giant: calc((100vw - 2 * var(--margin)) / 5.42);      /* ПОДАТЬ across the page */
+
+  /* space: one grid, one pair of margins, used everywhere */
+  --margin: clamp(1.25rem, 2.2vw, 2rem);
+  --gutter: clamp(1rem, 1.8vw, 1.75rem);
+  --section: clamp(6rem, 12vw, 13rem);
+  --radius: 0px;           /* square corners, decided once */
+  --bar: 4.5rem;           /* header height */
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --t-ui: 240ms;
+  --t-reveal: 800ms;
+}
+
+/* A field sets the ground and the single ink for everything inside it. */
+.field-red { --f-bg: var(--red); --f-ink: var(--red-ink); --f-soft: var(--red-ink); --f-action: var(--ink); --f-action-ink: var(--paper); }
+.field-green { --f-bg: var(--green); --f-ink: var(--green-ink); --f-soft: var(--green-ink); --f-action: var(--ink); --f-action-ink: var(--paper); }
+.field-yellow { --f-bg: var(--yellow); --f-ink: var(--yellow-ink); --f-soft: var(--yellow-ink); --f-action: var(--ink); --f-action-ink: var(--paper); }
+.field-ink { --f-bg: var(--black); --f-ink: var(--black-ink); --f-soft: #b9b3a6; --f-action: var(--red); --f-action-ink: var(--red-ink); }
+.field-paper { --f-bg: var(--paper); --f-ink: var(--ink); --f-soft: var(--ink-soft); --f-action: var(--red); --f-action-ink: var(--red-ink); }
+[class*='field-'] { background-color: var(--f-bg); color: var(--f-ink); }

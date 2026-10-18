@@ -1,0 +1,41 @@
+/* ---------- chips: toggles for exam subjects and filters ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; border: 0; min-width: 0; }
+.chip {
+  min-height: 2.75rem; padding: 0 1rem;
+  background: var(--chip-bg, var(--paper)); color: var(--chip-ink, var(--ink));
+  font-size: 0.9375rem; font-weight: 500; line-height: 1.1; white-space: nowrap;
+  transition: background-color var(--t-hover) ease, color var(--t-hover) ease, transform var(--t-press) var(--ease-out);
+}
+.chip[aria-pressed='true'] { background: var(--chip-on, var(--ink)); color: var(--chip-on-ink, var(--paper)); }
+.chip[aria-pressed='true']::before { content: '✓\00a0'; } /* taste-skill-ignore: a text check mark (U+2713), not an emoji */
+.chip:active:not(:disabled) { transform: scale(0.96); }
+.chip:disabled { cursor: default; opacity: 1; }
+@media (hover: hover) and (pointer: fine) { .chip:not(:disabled):not([aria-pressed='true']):hover { background: var(--chip-hover, var(--paper-2)); } }
+
+/* ---------- slips: programmes printed like receipts ---------- */
+.slip { --h: 34; flex: 1 1 0; min-width: 0; height: calc(var(--h) * 1svh); background: var(--paper); color: var(--ink); transform-origin: 50% 100%; }
+.slip-tilt-l { transform: rotate(-1.5deg); }
+.slip-tilt-r { transform: rotate(1.2deg); }
+.slip-body { display: flex; flex-direction: column; gap: 0.3rem; height: 100%; padding: 1.1rem 1.1rem 0; overflow: hidden; font-size: var(--step-ui); line-height: 1.35; text-decoration: none; }
+.slip-name { font-weight: 600; line-height: 1.2; }
+.slip-cut { overflow: hidden; white-space: nowrap; color: var(--ink-soft); letter-spacing: 0.06em; }
+@media (hover: hover) and (pointer: fine) {
+  .slip { transition: transform var(--t-ui) var(--ease-out); }
+  .slip:hover { transform: translateY(-1.25rem) rotate(0deg); }
+}
+
+/* ---------- band: the whole field is one link ---------- */
+.band { position: relative; display: block; min-height: 60svh; padding: var(--margin); overflow: hidden; text-decoration: none; transition: background-color 0s, color 0s; }
+.band-note { display: block; max-width: 34ch; font-size: var(--step-lead); line-height: 1.35; }
+.band-arrow { position: absolute; top: var(--margin); right: var(--margin); }
+.band-arrow svg { width: 3rem; height: 3rem; }
+.band-word { position: absolute; left: var(--margin); bottom: 1.5rem; font-size: var(--step-giant); line-height: 0.8; white-space: nowrap; }
+.band-word[style*='--fit'] { font-size: min(var(--step-giant), calc((100vw - 2 * var(--margin)) / (var(--fit) * 1.03))); } /* longer verbs are fitted to the width */
+.band:hover, .band:focus-visible { background: var(--ink); color: var(--red); }
+.band:focus-visible { outline-offset: -6px; }
+
+/* ---------- missing picture slot (only while a generated picture is pending) ---------- */
+.img-missing { background: var(--paper-2); width: 100%; height: 100%; }
+
+/* «Иллюстрация»: a generated picture standing in for a real place until it is photographed */
+.photo-note { position: absolute; left: 0; top: 0; padding: 0.3rem 0.65rem; background: var(--paper); color: var(--ink); font-size: var(--step-small); }

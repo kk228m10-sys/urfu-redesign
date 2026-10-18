@@ -1,0 +1,372 @@
+{
+ "guk-front": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.7778
+ },
+ "guk-night": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.3333
+ },
+ "guk-columns": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.9238
+ },
+ "guk-winter": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 2.3245
+ },
+ "urgu": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.3333
+ },
+ "plaque": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.3333
+ },
+ "guk-2022": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.7778
+ },
+ "guk-entrance": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.3953
+ },
+ "urgu-2022": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.7778
+ },
+ "hero-stairs": {
+  "widths": [
+   1536,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.5
+ },
+ "showcase-hall": {
+  "widths": [
+   1672,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.7787
+ },
+ "life-sport": {
+  "widths": [
+   960,
+   640
+  ],
+  "alpha": false,
+  "ratio": 1
+ },
+ "life-stage": {
+  "widths": [
+   960,
+   640
+  ],
+  "alpha": false,
+  "ratio": 1
+ },
+ "life-dorm": {
+  "widths": [
+   960,
+   640
+  ],
+  "alpha": false,
+  "ratio": 1
+ },
+ "life-winter": {
+  "widths": [
+   960,
+   640
+  ],
+  "alpha": false,
+  "ratio": 1
+ },
+ "life-robotics": {
+  "widths": [
+   960,
+   640
+  ],
+  "alpha": false,
+  "ratio": 1
+ },
+ "cutout-applicant": {
+  "widths": [
+   1200,
+   800
+  ],
+  "alpha": true,
+  "ratio": 0.6073
+ },
+ "program-hv-lab": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "program-panel-hands": {
+  "widths": [
+   960,
+   640
+  ],
+  "alpha": false,
+  "ratio": 1
+ },
+ "program-powerlines": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.791
+ },
+ "institute-turbine": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.791
+ },
+ "science-laser": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "science-microscope": {
+  "widths": [
+   960,
+   640
+  ],
+  "alpha": false,
+  "ratio": 1
+ },
+ "science-observatory": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.791
+ },
+ "news-datacenter": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "news-voice": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "news-donor": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "campus-new": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.791
+ },
+ "campus-room": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "campus-cafe": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "library": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "international": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "cutout-lost": {
+  "widths": [
+   881,
+   800
+  ],
+  "alpha": true,
+  "ratio": 0.4152
+ },
+ "program-renewables": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "program-drive": {
+  "widths": [
+   1920,
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.4907
+ },
+ "bld-r": {
+  "widths": [
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.3333
+ },
+ "bld-s": {
+  "widths": [
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.3333
+ },
+ "bld-h": {
+  "widths": [
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.2955
+ },
+ "bld-mt": {
+  "widths": [
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.3646
+ },
+ "bld-f": {
+  "widths": [
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.6798
+ },
+ "bld-t": {
+  "widths": [
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.3333
+ },
+ "bld-i": {
+  "widths": [
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 0.7503
+ },
+ "bld-ifk": {
+  "widths": [
+   1280,
+   768
+  ],
+  "alpha": false,
+  "ratio": 1.3333
+ }
+}

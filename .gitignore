@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.taste-skill/inspect*/
+assets/incoming/
+*.log
+.dist-next/
+.dist-next-*/
+.dist-lock/

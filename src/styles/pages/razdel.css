@@ -1,0 +1,9 @@
+/* Раздел новой структуры, который в прототипе не свёрстан (stub.css gives the preview cards) */
+.rz-panels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
+.rz-panel { display: flex; align-items: flex-end; min-height: 16rem; padding: clamp(1.25rem, 2.5vw, 2rem); font-size: var(--step-lead); line-height: 1.35; font-weight: 500; }
+.rz-related { margin-top: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.phead-photo { position: relative; }
+@media (max-width: 48rem) {
+  .rz-panels, .rz-related { grid-template-columns: 1fr; }
+  .rz-panel { min-height: 10rem; }
+}

@@ -1,0 +1,12 @@
+.stub { min-height: calc(100svh - var(--bar)); padding-block: clamp(3rem, 8vw, 7rem); }
+.stub-title { font-size: min(var(--step-display), calc((100vw - 2 * var(--margin)) / 12)); max-width: 14ch; }
+.stub-lead { margin-top: 2rem; max-width: 46ch; }
+.stub-list { margin-top: clamp(3rem, 6vw, 5rem); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
+.stub-link { display: grid; grid-template-columns: 1fr auto; gap: 0.25rem 1rem; min-height: 6.5rem; padding: 1.1rem 1.25rem; background: var(--paper); color: var(--ink); text-decoration: none; transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
+.stub-shot { grid-column: 1 / -1; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; margin-bottom: 0.6rem; }
+.stub-link-title { font-weight: 600; font-size: 1.125rem; }
+.stub-link-note { grid-column: 1; font-size: 0.9375rem; color: var(--ink-soft); }
+.stub-link svg { grid-column: 2; grid-row: 2 / span 2; width: 1.5rem; height: 1.5rem; align-self: center; }
+@media (hover: hover) and (pointer: fine) { .stub-link:hover { background: var(--ink); color: var(--paper); } .stub-link:hover .stub-link-note { color: inherit; } }
+@media (max-width: 60rem) { .stub-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 40rem) { .stub-list { grid-template-columns: 1fr; } }
