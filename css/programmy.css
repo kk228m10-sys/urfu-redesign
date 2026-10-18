@@ -1,0 +1,54 @@
+/* Каталог программ: filters on top, groups as an index with the group name pinned at the left. */
+.cat { padding-bottom: clamp(4rem, 8vw, 7rem); }
+.cat-filters { position: relative; display: grid; gap: 1rem; padding-block: 1.5rem 1.25rem; background: var(--paper); }
+.cat-search { display: flex; align-items: center; gap: 0.75rem; min-height: 3.5rem; padding: 0 1.1rem; background: var(--paper-2); max-width: 46rem; }
+.cat-search svg { width: 1.3rem; height: 1.3rem; flex: none; }
+.cat-search input { flex: 1; min-width: 0; height: 3.5rem; border: 0; background: none; font-size: var(--step-body); outline: none; }
+.cat-search input::-webkit-search-cancel-button { display: none; }
+.cat-search:focus-within { outline: 3px solid var(--ink); outline-offset: 2px; }
+.cat-legend { display: block; width: 100%; margin-bottom: 0.4rem; padding: 0; font-size: var(--step-small); color: var(--ink-soft); }
+.cat .chips { --chip-bg: var(--paper-2); --chip-on: var(--red); --chip-on-ink: var(--red-ink); --chip-hover: #d3cbb9; }
+.cat-row { display: flex; flex-wrap: wrap; gap: 1rem 2rem; align-items: end; }
+.cat-sort select { min-height: 2.75rem; padding: 0 2.25rem 0 0.9rem; border: 0; background: var(--paper-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d1d1b' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 0.6rem center / 1.1rem; appearance: none; font-size: var(--step-ui); font-weight: 500; }
+.cat-count { display: flex; align-items: baseline; gap: 0.4rem; font-size: var(--step-body); }
+.cat-count strong { font-family: var(--font-display); font-weight: 800; font-size: var(--step-lead); }
+.cat-reset { margin-left: 1rem; font-size: var(--step-ui); }
+
+.cat-groups { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
+.cat-group { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); padding-block: 1.75rem; }
+.cat-group[hidden] { display: none; }
+.cat-group-title { grid-column: 1 / span 4; align-self: start; position: sticky; top: calc(var(--bar) + 1.5rem); font-size: var(--step-lead); font-weight: 600; line-height: 1.25; padding-right: 1.5rem; }
+.cat-group-code { display: block; margin-top: 0.35rem; font-size: var(--step-ui); font-weight: 400; color: var(--ink-soft); }
+.cat-list { grid-column: 5 / span 8; display: grid; gap: 0.25rem; }
+
+.prog[hidden] { display: none; }
+.prog-box[open] { background: var(--paper-2); }
+.prog-sum { display: grid; grid-template-columns: 1fr auto 2rem; column-gap: 1.25rem; row-gap: 0.15rem; padding: 0.9rem 1rem; cursor: pointer; list-style: none; }
+.prog-sum::-webkit-details-marker { display: none; }
+.prog-name { grid-column: 1; font-size: var(--step-lead); line-height: 1.25; font-weight: 500; }
+.prog-meta { grid-column: 1; font-size: 1.0625rem; color: var(--ink-soft); }
+.prog-cost { grid-column: 2; grid-row: 1; align-self: baseline; font-size: var(--step-ui); white-space: nowrap; }
+.prog-sign { grid-column: 3; grid-row: 1 / span 2; align-self: center; }
+.prog-sign svg { width: 1.4rem; height: 1.4rem; transition: transform var(--t-ui) var(--ease-out); }
+.prog-box[open] .prog-sign svg { transform: rotate(45deg); }
+.prog-more { display: grid; gap: 1.25rem; padding: 0.25rem 1rem 1.25rem; }
+.prog-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem var(--gutter); margin: 0; }
+.prog-facts dt { font-size: var(--step-small); color: var(--ink-soft); margin-bottom: 0.25rem; }
+.prog-facts dd { margin: 0; font-size: var(--step-body); line-height: 1.45; }
+.prog-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.prog.is-target .prog-box { background: var(--yellow); }
+@media (hover: hover) and (pointer: fine) {
+  .prog-sum { transition: background-color var(--t-hover) ease; }
+  .prog-sum:hover { background: var(--paper-2); }
+  .prog-sum:hover .prog-name { text-decoration: underline; text-decoration-thickness: 0.06em; text-underline-offset: 0.18em; }
+}
+.cat-empty { padding-block: 3rem; max-width: 40ch; }
+
+@media (max-width: 48rem) {
+  .cat-filters { position: static; }
+  .cat-group { display: block; padding-top: 5rem; }
+  .cat-group-title { position: static; margin-bottom: 0.75rem; }
+  .prog-sum { grid-template-columns: 1fr 2rem; }
+  .prog-cost { grid-column: 1; grid-row: auto; }
+  .prog-facts { grid-template-columns: 1fr; }
+}

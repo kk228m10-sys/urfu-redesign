@@ -1,0 +1,19 @@
+/* Shared by the campus page and the institute pages. */
+/* ---------- the plan of Втузгородок (traced from the campus map; units are pixels of that map) ----------
+   A light printed sheet on the paper page, as on the campus map: white streets, a green square, every
+   building in its own gem colour with an ink outline and a white letter, rhodonite passages. */
+.plan { display: block; width: 100%; height: auto; background: var(--map-ground); }
+.plan-square { fill: var(--map-square); }
+.plan-lawn { fill: var(--map-lawn); }
+.plan-street { fill: var(--map-street); }
+.plan-landmark { fill: var(--map-other); }
+.plan-link-case { stroke: var(--ink); stroke-width: 9; }
+.plan-link { stroke: var(--map-link); stroke-width: 4.5; }
+.plan-name { font-family: var(--font-text); font-weight: 500; font-size: 15px; fill: var(--ink-soft); }
+.plan-b { cursor: pointer; outline: none; transition: opacity 300ms ease, translate 220ms var(--ease-out); }
+.plan-b path { fill: var(--b); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; transition: stroke-width 200ms ease; }
+.plan-code { font-family: var(--font-display); font-weight: 800; font-size: calc(var(--s) * 1px); fill: #fff; stroke: var(--ink); stroke-width: calc(var(--s) * 0.14px); stroke-linejoin: round; paint-order: stroke; pointer-events: none; }
+.plan-b:hover path, .plan-b:focus-visible path, .plan-b.is-on path { stroke-width: 5; }
+.plan.has-on .plan-b:not(.is-on) { opacity: 0.3; }
+.plan-mini .plan-other { fill: var(--map-other); }
+.plan-mini .plan-other.is-on { fill: var(--b); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }

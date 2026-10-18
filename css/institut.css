@@ -1,0 +1,46 @@
+/* Институт */
+.inst-sign { grid-column: 1 / span 3; grid-row: 2; display: grid; gap: 0.75rem; align-content: start; }
+.inst-mark { width: min(11rem, 100%); height: auto; }
+.inst-mark .mark-arm { fill: var(--yellow); }
+.inst-mark .mark-stem { fill: var(--ink); }
+.inst-sign-note { max-width: 22ch; color: var(--ink-soft); }
+.inst-hero { margin: 0; height: 72svh; overflow: hidden; }
+.inst-hero img { height: 100%; }
+
+/* four directions stacked as one poster, each line fitted to the width */
+.dirs { padding-block: clamp(2.5rem, 5vw, 4rem); }
+.dirs-list { display: grid; }
+.dir-link { display: grid; gap: 0.3rem; padding: 1rem var(--margin); text-decoration: none; transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
+.dir-word { font-size: calc((100vw - 2 * var(--margin)) / (var(--fit) * 1.02)); line-height: 0.95; }
+.dir-meta { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; font-size: var(--step-body); }
+.dir-meta svg { width: 1em; height: 1em; }
+@media (hover: hover) and (pointer: fine) { .dir-link:hover { background: var(--ink); color: var(--yellow); } }
+
+.kaf-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem var(--gutter); }
+.kaf { display: grid; align-content: start; gap: 0.6rem; container-type: inline-size; }
+.kaf-room { font-size: min(var(--step-head), 18cqi); text-decoration: none; line-height: 1; }
+.kaf-name { font-size: var(--step-lead); font-weight: 600; line-height: 1.25; }
+@media (hover: hover) and (pointer: fine) { .kaf-room:hover { color: var(--red); } }
+
+.inst-lab { display: grid; grid-template-columns: 7fr 5fr; min-height: 64svh; }
+.inst-lab-photo { margin: 0; overflow: hidden; }
+.inst-lab-photo img { height: 100%; }
+.inst-lab-text { display: grid; align-content: center; gap: 1.5rem; padding: clamp(2.5rem, 5vw, 4.5rem) var(--margin); }
+
+.where { padding-block: clamp(3.5rem, 7vw, 6rem) 0; }
+.where .sec-title { margin-bottom: 2rem; }
+.where-grid { display: grid; grid-template-columns: 3fr 2fr; gap: var(--gutter); align-items: start; }
+.where-photo { margin: 0; }
+.where-photo img { aspect-ratio: 4 / 3; height: auto; object-fit: cover; }
+.where-photo figcaption { margin-top: 0.6rem; color: var(--ink-soft); }
+@media (max-width: 64rem) { .kaf-list { row-gap: 5rem; } }
+
+@media (max-width: 48rem) {
+  .where-grid { grid-template-columns: 1fr; }
+  .inst-sign { grid-column: 1 / -1; grid-row: auto; }
+  .inst-mark { width: 6rem; }
+  .inst-hero { height: 48svh; }
+  .kaf-list { grid-template-columns: 1fr 1fr; }
+  .inst-lab { grid-template-columns: 1fr; }
+  .inst-lab-photo { aspect-ratio: 4 / 3; }
+}

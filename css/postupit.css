@@ -1,0 +1,92 @@
+/* Поступление */
+
+/* ---------- the summer calendar ---------- */
+.cal { --k-start: var(--ink); --k-deadline: var(--red); --k-consent: var(--green); --k-order: var(--yellow); --k-contract: var(--green); }
+.cal-switch { display: flex; gap: 0.5rem; margin-bottom: 2rem; }
+.cal-months { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 3rem); }
+.cal-name { font-size: var(--step-head); margin-bottom: 1rem; }
+.cal-grid { width: 100%; border-collapse: separate; border-spacing: 4px; table-layout: fixed; }
+.cal-grid th { font-size: var(--step-small); font-weight: 500; color: var(--ink-soft); text-align: left; padding: 0 0 0.25rem 0.4rem; }
+.cal-grid td { padding: 0; }
+.cal-day { display: flex; align-items: flex-start; aspect-ratio: 1; padding: 0.35rem 0.45rem; background: var(--paper-2); font-size: var(--step-ui); font-variant-numeric: tabular-nums; transition: background-color var(--t-ui) ease, color var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
+[data-set='budget'] .cal-day[data-budget], [data-set='paid'] .cal-day[data-paid] { color: var(--paper); font-weight: 600; cursor: help; }
+[data-set='budget'] .cal-day[data-budget='start'], [data-set='paid'] .cal-day[data-paid='start'] { background: var(--k-start); }
+[data-set='budget'] .cal-day[data-budget='deadline'], [data-set='paid'] .cal-day[data-paid='deadline'] { background: var(--k-deadline); color: var(--red-ink); }
+[data-set='budget'] .cal-day[data-budget='consent'], [data-set='paid'] .cal-day[data-paid='consent'] { background: var(--k-consent); color: var(--ink); }
+[data-set='budget'] .cal-day[data-budget='order'], [data-set='paid'] .cal-day[data-paid='order'] { background: var(--k-order); color: var(--ink); }
+[data-set='budget'] .cal-day[data-budget='contract'], [data-set='paid'] .cal-day[data-paid='contract'] { background: var(--k-contract); color: var(--ink); }
+.cal-day.is-lit { transform: scale(1.12); outline: 3px solid var(--ink); outline-offset: 0; position: relative; z-index: 1; }
+.cal-legend { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin-top: 1.5rem; }
+.cal-legend li { display: inline-flex; align-items: center; gap: 0.5rem; }
+.cal-swatch { width: 1rem; height: 1rem; display: inline-block; background: var(--paper-2); }
+.cal-swatch[data-kind='start'] { background: var(--k-start); }
+.cal-swatch[data-kind='deadline'] { background: var(--k-deadline); }
+.cal-swatch[data-kind='consent'] { background: var(--k-consent); }
+.cal-swatch[data-kind='order'] { background: var(--k-order); }
+.cal-swatch[data-kind='contract'] { background: var(--k-contract); }
+.cal-lists { margin-top: clamp(2.5rem, 5vw, 4rem); }
+.cal-list { display: grid; }
+.cal-event { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 2fr) minmax(0, 6fr); column-gap: var(--gutter); padding-block: 0.55rem; font-size: var(--step-lead); line-height: 1.35; transition: background-color var(--t-hover) ease; }
+.cal-event-date { font-weight: 600; }
+.cal-event-time { font-weight: 400; }
+.cal-event-kind { color: var(--ink-soft); }
+.cal-event.is-lit { background: var(--paper-2); }
+@media (prefers-reduced-motion: no-preference) {
+  .cal-months.is-switching .cal-day { transition-delay: calc(var(--d, 0) * 6ms); }
+}
+
+/* ---------- checklist ---------- */
+.steps-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 2rem; }
+.steps-side { grid-column: 1 / span 4; display: grid; align-content: start; gap: 1.25rem; position: sticky; top: calc(var(--bar) + 1.5rem); align-self: start; }
+.steps-note { max-width: 30ch; }
+.steps-count { font-weight: 600; }
+.steps-list { grid-column: 5 / span 8; }
+.page-postupit .field-yellow { --f-surface: var(--paper); --f-track: rgb(29 29 27 / 0.18); }
+
+/* ---------- two ways to apply, split down the middle ---------- */
+.ways-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.way { display: grid; align-content: start; gap: 1.5rem; padding: clamp(3rem, 7vw, 6rem) var(--margin); container-type: inline-size; }
+.way + .way { background: var(--red); color: var(--red-ink); --f-action: var(--ink); --f-action-ink: var(--paper); }
+.way-word { font-size: calc(100cqi / (var(--fit) * 1.04)); }
+.way-text { font-size: var(--step-lead); line-height: 1.4; max-width: 36ch; }
+.way .btn { justify-self: start; }
+
+/* ---------- the price range as one figure ---------- */
+.price { padding-block: clamp(4rem, 9vw, 8rem) clamp(3rem, 6vw, 5rem); overflow: clip; }
+.price-figure { margin-top: clamp(2rem, 5vw, 4rem); margin-left: -0.04em; white-space: nowrap; }
+.price-notes { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 1rem; margin-top: 2rem; }
+.price-notes > * { grid-column: 5 / span 6; }
+.price-notes .btn { justify-self: start; margin-top: 0.5rem; }
+
+/* ---------- questions ---------- */
+.faq-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 2rem; }
+.faq-grid .sec-title { grid-column: 1 / span 4; }
+.faq-grid .faq { grid-column: 5 / span 8; }
+
+@media (max-width: 60rem) {
+  .cal-months { grid-template-columns: 1fr; max-width: 28rem; }
+  .cal-event { grid-template-columns: 1fr auto; }
+  .cal-event-label { grid-column: 1 / -1; font-size: var(--step-body); }
+}
+@media (max-width: 48rem) {
+  .steps-side, .steps-list, .faq-grid .sec-title, .faq-grid .faq, .price-notes > * { grid-column: 1 / -1; }
+  .steps-side { position: static; }
+  .ways-grid { grid-template-columns: 1fr; }
+  .price-figure { font-size: calc((100vw - 2 * var(--margin)) / 5.2); }
+}
+
+/* ---------- photographs ---------- */
+.steps-photo { margin: 1rem 0 0; aspect-ratio: 4 / 5; overflow: hidden; }
+.steps-photo img, .way-photo img, .faq-photo img { height: 100%; }
+.way-photo { margin: 1rem 0 0; aspect-ratio: 16 / 9; overflow: hidden; rotate: 1.5deg; }
+.faq-side { grid-column: 1 / span 4; display: grid; align-content: start; gap: 2rem; position: sticky; top: calc(var(--bar) + 1.5rem); align-self: start; }
+.faq-photo { margin: 0; aspect-ratio: 3 / 4; overflow: hidden; max-width: 22rem; }
+.faq-grid .faq-side .sec-title { grid-column: auto; }
+
+@media (max-width: 60rem) { .cal-months { row-gap: 5rem; } }
+@media (max-width: 48rem) {
+  .way { padding-block: 5.5rem; }
+  .faq-side { grid-column: 1 / -1; position: static; }
+  .faq-photo { display: none; }
+  .steps-photo { aspect-ratio: 16 / 9; }
+}
