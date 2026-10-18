@@ -6,7 +6,9 @@ import { pageHead } from '../components/pagehead.mjs';
 import { icon } from '../components/icons.mjs';
 import { img, credits } from '../components/media.mjs';
 
-const { who, items } = readJSON('src/data/events.json');
+const { who: AUDIENCES, items } = readJSON('src/data/events.json');
+// only the audiences that have events this month get a filter, so no chip leads to an empty wall
+const who = AUDIENCES.filter((w) => items.some((e) => e.who === w));
 const MONTH = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
 const parts = (iso) => { const [y, m, d] = iso.split('-').map(Number); return { y, m, d, month: MONTH[m - 1] }; };
 const range = (e) => { const a = parts(e.from); if (!e.to) return `${a.d} ${a.month}`; const b = parts(e.to); return a.m === b.m ? `${a.d}–${b.d} ${b.month}` : `${a.d} ${a.month} — ${b.d} ${b.month}`; };

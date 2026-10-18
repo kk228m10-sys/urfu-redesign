@@ -30,7 +30,7 @@ export const RAZDELY = [
   { slug: 'shkolnikam', section: 'postupit', title: 'Школьникам: олимпиады и курсы', lines: ['Школьникам'],
     lead: 'Олимпиады, курсы подготовки и события для школьников.',
     plan: ['Олимпиады, которые дают льготы при поступлении, — с датами в календарь телефона.', 'Курсы подготовки к ЕГЭ: расписание и запись.', 'События для школьников — в общей афише, одним фильтром.'],
-    ext: 'https://urfu.ru/ru/school/', extLabel: 'urfu.ru', extra: { href: 'afisha.html?who=Школьникам', label: 'События для школьников' }, related: ['afisha.html', 'index.html'] },
+    ext: 'https://urfu.ru/ru/school/', extLabel: 'urfu.ru', extra: { href: 'index.html#podbor', label: 'Подобрать по ЕГЭ' }, related: ['afisha.html', 'index.html'] },
   { slug: 'stipendii', section: 'uchitsya', title: 'Стипендии', lines: ['Стипендии'],
     lead: 'Все стипендии университета на одной странице: кому положены и как подать заявление.',
     plan: ['Виды стипендий: академическая, социальная, повышенная и именные.', 'Калькулятор: какая стипендия положена именно тебе.', 'Сроки подачи заявлений и документы.'],
