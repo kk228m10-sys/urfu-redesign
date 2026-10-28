@@ -1,12 +1,14 @@
 // Главная. Argument: you can get in (hero) → 9 855 free places (figure) → 13 institutes and where they
 // are (list) → which programmes your exams open (the live finder) → life after classes (tiles) →
 // four steps with the real 2026 dates (stairs) → one verb (band) → the phone number (footer).
-import { html, esc, readJSON, num, rub, jsonScript, plural } from '../lib.mjs';
+import { html, esc, readJSON, num, rub, jsonScript, plural, MOTION } from '../lib.mjs';
 import { page } from '../components/layout.mjs';
 import { img, credits } from '../components/media.mjs';
 import { icon } from '../components/icons.mjs';
 import { STEPS } from '../admission.mjs';
 import { programHref } from '../site.mjs';
+import { motionHome } from '../motion/home.mjs';
+import { campus3dData } from '../components/campus3d.mjs';
 
 const { subjects, programs } = readJSON('src/data/programs.json');
 const { institutes } = readJSON('src/data/institutes.json');
@@ -70,7 +72,7 @@ const IMAGES = ['hero-stairs', 'showcase-hall', 'cutout-applicant', ...TILES.fil
 
 export default function () {
   let photoIndex = 0;
-  const body = html`
+  const hero = html`
 <section class="hero field-paper" aria-labelledby="hero-title">
   <div class="hero-grid wrap">
     <div class="hero-talk">
@@ -93,6 +95,9 @@ export default function () {
   </div>
 </section>
 
+`;
+
+  const figure = html`
 <section class="figure-screen field-green" aria-labelledby="budget-title">
   <div class="wrap figure-wrap">
     <h2 class="figure-claim" id="budget-title" data-reveal>У нас бюджетных мест</h2>
@@ -102,8 +107,9 @@ export default function () {
     </div>
     <p class="figure-source small">Источник: urfu.ru, «Об УрФУ в цифрах», сентябрь 2026</p>
   </div>
-</section>
+</section>`;
 
+  const lineup = html`
 <section class="lineup field-paper" id="instituty" aria-labelledby="inst-title">
   <h2 class="sr-only" id="inst-title">Институты и их адреса</h2>
   <div class="wrap">
@@ -127,8 +133,9 @@ export default function () {
       )}
     </table>
   </div>
-</section>
+</section>`;
 
+  const showcase = html`
 <section class="showcase" id="podbor" aria-labelledby="finder-title" data-finder>
   <div class="showcase-photo">${img('showcase-hall', { alt: 'Читальный зал: студенты за длинными столами в полосах света из окон', sizes: '100vw', cls: 'cover', pos: '50% 30%' })}</div>
   <div class="showcase-talk wrap">
@@ -146,8 +153,9 @@ export default function () {
   <ul class="slips" role="list" data-finder-slips aria-label="Подходящие направления">
     ${startList.slice(0, 6).map(slip)}
   </ul>
-</section>
+</section>`;
 
+  const tiles = html`
 <section class="tiles field-ink" aria-labelledby="life-title">
   <ul class="tiles-grid" role="list">
     ${TILES.map((t, i) => {
@@ -165,8 +173,9 @@ export default function () {
       return html`<li class="tile field-${pair}" data-reveal style="--i:${i % 4}">${t.href ? html`<a class="tile-link" href="${t.href}">${inner}</a>` : html`<${Tag} class="tile-inner">${inner}</${Tag}>`}</li>`;
     })}
   </ul>
-</section>
+</section>`;
 
+  const board = html`
 <section class="week-board field-paper" aria-labelledby="board-title">
   <div class="wrap board-grid">
     <h2 class="sec-title board-title" id="board-title">У нас на неделе</h2>
@@ -178,8 +187,9 @@ export default function () {
       ${SOON.map((e, i) => { const t = dm(e.from); return html`<li class="board-event field-${['yellow', 'red', 'ink'][i]}" data-reveal style="--i:${i}"><a class="board-event-link" href="afisha.html"><span class="board-day display">${t.d}</span><span class="board-month">${t.m}</span><span class="board-text">${esc(e.title)}</span><span class="board-kind">${esc(e.kind)}</span></a></li>`; })}
     </ul>
   </div>
-</section>
+</section>`;
 
+  const stairs = html`
 <section class="stairs field-green" aria-labelledby="steps-title">
   <h2 class="sr-only" id="steps-title">Как поступить</h2>
   <figure class="stairs-figure" data-reveal style="--i:2">${img('cutout-applicant', { alt: 'Выпускник в прыжке от радости, в руке телефон', sizes: '(min-width: 48em) 24vw, 60vw', cls: 'stairs-cut' })}</figure>
@@ -191,14 +201,17 @@ export default function () {
     </li>`,
     )}
   </ol>
-</section>
+</section>`;
 
+  const band = html`
 <a class="band field-red" href="postupit.html#podat">
   <span class="band-note">Документы принимают с 20 июня — онлайн через Госуслуги или в ГУК-100.</span>
   <span class="band-arrow" aria-hidden="true">${icon.arrow}</span>
   <span class="band-word giant">Подать</span>
-</a>
-`;
+</a>`;
+
+  // the motion edition rebuilds the home page around the same working parts (finder, board, band)
+  const body = MOTION ? motionHome({ figure, showcase, tiles, board, band }) : html`${hero}${figure}${lineup}${showcase}${tiles}${board}${stairs}${band}`;
 
   return {
     file: 'index.html',
@@ -207,10 +220,10 @@ export default function () {
       title: 'Уральский федеральный университет — УрФУ',
       description: '358 программ, 13 институтов и 9 855 бюджетных мест. Подбор направления по ЕГЭ, сроки приёма 2026, общежития и жизнь в УрФУ.',
       body,
-      styles: ['home.css'],
-      scripts: ['finder.js', 'home.js'],
-      vendor: ['gsap.min.js', 'ScrollTrigger.min.js'],
-      data: jsonScript('finder-data', { subjects, programs, start: START }),
+      styles: MOTION ? ['home.css', 'motion-home.css'] : ['home.css'],
+      scripts: MOTION ? ['finder.js', 'campus3d.js', 'mh.js'] : ['finder.js', 'home.js'],
+      vendor: MOTION ? ['gsap.min.js', 'ScrollTrigger.min.js', 'three.min.js'] : ['gsap.min.js', 'ScrollTrigger.min.js'],
+      data: jsonScript('finder-data', { subjects, programs, start: START }) + (MOTION ? campus3dData() : ''),
       credits: [...credits(IMAGES), 'видео со снегом в блоке «Жизнь» сгенерировано нейросетью'],
     }),
   };

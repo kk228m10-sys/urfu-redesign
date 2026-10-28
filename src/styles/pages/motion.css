@@ -1,0 +1,37 @@
+/* Motion edition — the layer on top of the prototype: intro and page curtains, a reading bar, the
+   3D campus on «Где аудитория». The home page scenes live in motion-home.css. Everything here is decoration: with reduced motion none of it runs. */
+
+/* page curtains replace the cross-document view transition of the plain prototype */
+@view-transition { navigation: none; }
+
+/* the curtain is up from the very first paint (set in <head>) until motion.js lifts it; if the script
+   never runs, it lifts by itself after three seconds */
+html.mo-covered::after { content: ''; position: fixed; inset: 0; z-index: 9998; background: var(--red); animation: mo-safety 0.01s linear 3s forwards; }
+@keyframes mo-safety { to { transform: translateY(-100%); } }
+.mo-curtain { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; background: var(--red); pointer-events: none; visibility: hidden; }
+.mo-curtain.is-on { visibility: visible; pointer-events: auto; }
+.mo-curtain svg { width: clamp(7rem, 16vw, 13rem); height: auto; overflow: visible; }
+.mo-curtain path { fill: var(--paper); }
+.mo-curtain-word { position: absolute; left: var(--margin); bottom: var(--margin); font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; font-size: clamp(1rem, 0.7rem + 1vw, 1.5rem); color: var(--paper); }
+
+/* reading bar */
+.mo-progress { position: fixed; left: 0; top: 0; z-index: 60; width: 100%; height: 4px; background: var(--red); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+
+/* photographs simply show: no shutter, no fade, no zoom on the way in */
+html.js [data-reveal]:has(img), html.js .shutter[data-reveal] { opacity: 1; transform: none; clip-path: none; transition: none; }
+html.js .shutter[data-reveal] img { transform: none; transition: none; }
+
+/* split headings: each word rises out of its own mask */
+.mo-split-word { display: inline-block; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.mo-covered::after, .mo-curtain, .mo-progress { display: none !important; }
+}
+
+/* «Где аудитория»: the 3D campus over the plan (kampus3d.js); the plan stays underneath for «План» */
+.map-3d { position: relative; }
+.map-3d-scene { position: absolute; inset: 0; visibility: hidden; background: var(--paper); }
+.map-3d.is-3d .map-3d-scene { visibility: visible; }
+.map-3d-scene .c3d-canvas { width: 100%; height: 100%; display: block; }
+.map-3d-toggle { position: absolute; right: 0.75rem; top: 0.75rem; z-index: 2; min-height: 2.75rem; padding: 0 1rem; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); font: 700 0.875rem/1 var(--font-display); text-transform: uppercase; cursor: pointer; }
+.map-3d-toggle:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }

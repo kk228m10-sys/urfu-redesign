@@ -1,5 +1,5 @@
 // The page shell: head, header with section panels, search dialog, footer and scripts.
-import { html, esc } from '../lib.mjs';
+import { html, esc, MOTION } from '../lib.mjs';
 import { SECTIONS, hrefOf, outAttrs, SERVICES, CONTACT } from '../site.mjs';
 import { lockup, mark } from './logo.mjs';
 import { icon } from './icons.mjs';
@@ -133,6 +133,8 @@ export const page = ({
 <link rel="stylesheet" href="${SITE_CSS}">
 ${styles.map((s) => html`<link rel="stylesheet" href="css/${s}">`)}
 <script>document.documentElement.classList.replace('no-js','js');try{if(localStorage.getItem('urfu-a11y')==='1')document.documentElement.classList.add('a11y')}catch(e){}</script>
+${MOTION ? html`<link rel="stylesheet" href="css/motion.css">
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&(!sessionStorage.getItem('mo-intro')||sessionStorage.getItem('mo-cover')))document.documentElement.classList.add('mo-covered')}catch(e){}</script>` : ''}
 </head>
 <body class="page-${id}${bodyClass ? ' ' + bodyClass : ''}" id="top">
 <a class="skip" href="#main">К содержанию</a>
@@ -145,9 +147,10 @@ ${menu()}
 ${search()}
 ${data}
 <script src="js/search-index.js" defer></script>
-${vendor.map((v) => html`<script src="vendor/${v}" defer></script>`)}
+${(MOTION ? [...new Set(['gsap.min.js', 'ScrollTrigger.min.js', 'SplitText.min.js', ...vendor])] : vendor).map((v) => html`<script src="vendor/${v}" defer></script>`)}
 <script src="js/site.js" defer></script>
 ${scripts.map((s) => html`<script src="js/${s}" defer></script>`)}
+${MOTION ? html`<script src="js/motion.js" defer></script>` : ''}
 </body>
 </html>
 `;

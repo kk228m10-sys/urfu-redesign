@@ -6,3 +6,5 @@ assets/incoming/
 .dist-next/
 .dist-next-*/
 .dist-lock/
+dist-motion/
+.dist-motion-lock/

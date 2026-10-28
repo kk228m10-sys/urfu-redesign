@@ -3,7 +3,8 @@
 // type) → every building with its photograph, its letter, where it stands and who is in it, each with
 // its own locator → the new campus. The plan is traced from the campus map the author sent
 // (build/campus-plan.mjs); every building is painted in its own Ural gem, as on that map.
-import { html, esc, jsonScript, inkOn } from '../lib.mjs';
+import { html, esc, jsonScript, inkOn, MOTION } from '../lib.mjs';
+import { campus3dData } from '../components/campus3d.mjs';
 import { paint, ground, locator } from '../components/plan.mjs';
 import { page } from '../components/layout.mjs';
 import { pageHead } from '../components/pagehead.mjs';
@@ -128,8 +129,9 @@ ${pageHead({
       section: 'uchitsya',
       body,
       styles: ['plan.css', 'kampus.css'],
-      scripts: ['kampus.js'],
-      data: jsonScript('rooms-data', ROOMS.map(({ id, code, name, address, who, where, color, ...r }) => ({ id, code, name, address, who, where, color, ink: inkOn(color), photo: photo(r, '(min-width: 48em) 30vw, 100vw') }))),
+      scripts: MOTION ? ['kampus.js', 'campus3d.js', 'kampus3d.js'] : ['kampus.js'],
+      vendor: MOTION ? ['three.min.js'] : [],
+      data: jsonScript('rooms-data', ROOMS.map(({ id, code, name, address, who, where, color, ...r }) => ({ id, code, name, address, who, where, color, ink: inkOn(color), photo: photo(r, '(min-width: 48em) 30vw, 100vw') }))) + (MOTION ? campus3dData() : ''),
       credits: credits(IMAGES),
     }),
   };

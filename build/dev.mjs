@@ -7,7 +7,7 @@ import { join, extname, resolve, sep } from 'node:path';
 import { ROOT } from './lib.mjs';
 
 const PORT = Number(process.env.PORT) || 4321;
-const dist = join(ROOT, 'dist');
+const dist = join(ROOT, process.env.EDITION === 'motion' ? 'dist-motion' : 'dist');
 const clients = new Set();
 const MIME = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',

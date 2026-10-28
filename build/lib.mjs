@@ -4,6 +4,9 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+// EDITION=motion builds the motion edition into dist-motion/: the same site with a film, an intro,
+// page curtains and scroll effects on top. The plain prototype in dist/ is never touched by it.
+export const MOTION = process.env.EDITION === 'motion';
 
 const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ESC[c]);

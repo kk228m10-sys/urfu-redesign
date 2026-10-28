@@ -5,16 +5,16 @@
 import { rmSync, mkdirSync, cpSync, writeFileSync, readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { ROOT } from './lib.mjs';
+import { ROOT, MOTION } from './lib.mjs';
 import { markFile } from './components/logo.mjs';
 import { searchIndex } from './search-index.mjs';
 import { flushMissing } from './fit.mjs';
 
-const dist = join(ROOT, 'dist');
+const dist = join(ROOT, MOTION ? 'dist-motion' : 'dist');
 // Each build stages in its own folder; syncs into dist/ are serialised with a lock directory,
 // so a manual build and the dev server's rebuild can never mix their files.
 const stage = join(ROOT, `.dist-next-${process.pid}`);
-const LOCK = join(ROOT, '.dist-lock');
+const LOCK = join(ROOT, MOTION ? '.dist-motion-lock' : '.dist-lock');
 const nm = (p) => join(ROOT, 'node_modules', p);
 
 // Fonts are inlined as base64 so they load from file:// too (Chrome blocks file:// font requests).
@@ -85,6 +85,12 @@ export async function build() {
   mkdirSync(join(stage, 'img'), { recursive: true });
   if (existsSync(join(ROOT, 'assets/img'))) cpSync(join(ROOT, 'assets/img'), join(stage, 'img'), { recursive: true });
   if (existsSync(join(ROOT, 'assets/video'))) cpSync(join(ROOT, 'assets/video'), join(stage, 'video'), { recursive: true });
+  if (MOTION) {
+    // the motion edition alone carries WebGL, inertia and the frames of the scrubbed film
+    cpSync(nm('three/build/three.min.js'), join(stage, 'vendor/three.min.js'));
+    cpSync(nm('gsap/dist/InertiaPlugin.min.js'), join(stage, 'vendor/InertiaPlugin.min.js'));
+    if (existsSync(join(ROOT, 'assets/frames'))) cpSync(join(ROOT, 'assets/frames'), join(stage, 'frames'), { recursive: true });
+  }
   writeFileSync(join(stage, 'img/favicon.svg'), markFile('#ffffff', '#e50046'));
   writeFileSync(join(stage, 'img/mark-red.svg'), markFile('#e50046'));
   writeFileSync(join(stage, 'img/mark-ink.svg'), markFile('#1d1d1b'));
