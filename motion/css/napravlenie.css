@@ -1,0 +1,41 @@
+/* Страница направления — the template for the programmes of the catalogue (programma.css gives the
+   exams and the facts). The code is the poster, the official name is the heading. */
+.np-code { font-size: min(var(--step-giant), calc((100vw - 2 * var(--margin)) / var(--fit))); line-height: 0.85; }
+/* the name takes two lines of the talk column: --nfit is the width (em) of the longer line of its best
+   two-line break, measured at build time */
+.np-head .phead-talk { container-type: inline-size; }
+.np-name { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.05; font-size: max(1.2rem, min(2.75rem, calc(100cqi / (var(--nfit) * 1.04)))); }
+/* official names run to ninety letters: those are set in the text face; the longest few take three
+   lines on a phone rather than shrink below a readable size */
+.np-name.is-long { font-family: var(--font-text); font-weight: 650; text-transform: none; letter-spacing: -0.01em; line-height: 1.12; font-size: max(1.15rem, min(2.1rem, calc(100cqi / (var(--nfit) * 1.06)))); }
+/* the facts carry longer values than the 13.03.02 page (a price): each value is sized to its panel */
+.np-facts .fact { container-type: inline-size; }
+.np-facts .fact-big { font-size: min(var(--step-head), 13cqi); }
+
+/* the other programmes of the group */
+.np-peers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
+.np-peer { display: grid; grid-template-columns: 1fr auto; gap: 0.4rem 1rem; height: 100%; min-height: 10rem; padding: 1.25rem; background: var(--paper-2); color: var(--ink); text-decoration: none; transition: background-color var(--t-hover) ease, color var(--t-hover) ease; }
+.np-peer-code { grid-column: 1; font-family: var(--font-display); font-weight: 800; font-size: var(--step-lead); }
+.np-peer-name { grid-column: 1; font-weight: 600; font-size: var(--step-lead); line-height: 1.25; }
+.np-peer-req { grid-column: 1; font-size: var(--step-ui); color: var(--ink-soft); }
+.np-peer svg { grid-column: 2; grid-row: 1 / span 3; align-self: end; width: 1.5rem; height: 1.5rem; }
+@media (hover: hover) and (pointer: fine) {
+  .np-peer:hover { background: var(--ink); color: var(--paper); }
+  .np-peer:hover .np-peer-req { color: inherit; }
+}
+
+/* the four steps of 2026 in one row */
+.np-steps .sec-title { margin-bottom: clamp(2rem, 4vw, 3rem); }
+.np-steps-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
+.np-step { display: grid; gap: 0.6rem; align-content: start; font-size: var(--step-body); line-height: 1.45; }
+.np-step-line { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; font-size: var(--step-lead); line-height: 1.1; }
+
+@media (max-width: 60rem) {
+  .np-peers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .np-steps-list { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+}
+@media (max-width: 40rem) {
+  .np-peers, .np-steps-list { grid-template-columns: 1fr; }
+  /* on a phone every name is set in the text face, a third narrower, on its own two-line measure */
+  .np-name, .np-name.is-long { font-family: var(--font-text); font-weight: 650; text-transform: none; letter-spacing: -0.01em; line-height: 1.12; font-size: max(1.15rem, min(2.1rem, calc(100cqi / (var(--tfit) * 1.06)))); }
+}

@@ -1,0 +1,53 @@
+/* Концепция — reads on screen and prints on A4 */
+.cc { padding-block: clamp(3rem, 6vw, 5rem); }
+.cc-grid { display: grid; gap: clamp(5rem, 8vw, 7rem); }
+.cc-block { display: grid; gap: 1.25rem; max-width: 72rem; }
+.cc-block > p { max-width: 70ch; font-size: var(--step-lead); line-height: 1.5; }
+.cc-h { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; letter-spacing: -0.03em; line-height: 1; font-size: var(--step-head); }
+.cc-idea-row { display: grid; grid-template-columns: 9rem 1fr; gap: 2rem; align-items: start; }
+.cc-mark { width: 9rem; height: 9rem; }
+.cc-audit { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gutter); }
+.cc-audit li { display: grid; gap: 0.5rem; align-content: start; }
+.cc-audit-num { font-size: var(--step-head); color: var(--red); line-height: 1; }
+.cc-ia { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.5rem; }
+.cc-ia-item { display: grid; gap: 0.75rem; align-content: start; min-height: 11rem; padding: 1.25rem; }
+.cc-ia-name { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: 1.05rem; letter-spacing: -0.02em; }
+.cc-ux { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem var(--gutter); margin: 0; }
+.cc-ux dt { font-weight: 600; font-size: var(--step-lead); }
+.cc-ux dd { margin: 0.35rem 0 0; }
+.cc-pages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem var(--gutter); }
+.cc-page { display: grid; gap: 0.4rem; align-content: start; }
+.cc-shot { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; background: var(--paper-2); }
+.cc-page-name { font-weight: 600; font-size: var(--step-body); }
+@media (max-width: 48rem) {
+  .cc-idea-row { grid-template-columns: 1fr; }
+  .cc-mark { width: 5rem; height: 5rem; }
+  .cc-audit, .cc-ux { grid-template-columns: 1fr 1fr; }
+  .cc-ia { grid-template-columns: 1fr; }
+  .cc-pages { grid-template-columns: 1fr 1fr; }
+}
+
+@page { size: A4; margin: 14mm 12mm; }
+@media print {
+  .site-header, .site-footer, .skip, .crumbs, .menu, .search { display: none !important; }
+  body { background: #fff; font-size: 11pt; }
+  .phead { padding-block: 0 8mm; }
+  .phead-grid { margin-top: 0; }
+  .phead-title { font-size: 40pt; }
+  .cc { padding-block: 0; }
+  .cc-grid { gap: 10mm; }
+  .cc-block { break-inside: avoid-page; }
+  .cc-block:has(.cc-pages) { break-inside: auto; }
+  .cc-h { font-size: 20pt; }
+  .cc-block > p { font-size: 11pt; }
+  .cc-pages { grid-template-columns: repeat(3, 1fr); gap: 5mm; }
+  .cc-page { break-inside: avoid; }
+  .cc-idea-row { grid-template-columns: 6rem 1fr; }
+  .cc-mark { width: 6rem; height: 6rem; }
+  .cc-audit { grid-template-columns: repeat(4, 1fr); }
+  .cc-ia { grid-template-columns: repeat(5, 1fr); }
+  .cc-ia-item { min-height: 0; padding: 4mm; }
+  .cc-ux { grid-template-columns: 1fr 1fr; }
+  [data-reveal], [data-rise], .lines [data-line] { opacity: 1 !important; transform: none !important; animation: none !important; }
+  a { text-decoration: none; }
+}

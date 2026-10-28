@@ -1,0 +1,27 @@
+/* 404 */
+.lost { position: relative; display: grid; min-height: calc(100svh - var(--bar)); overflow: clip; padding-block: clamp(2.5rem, 6vw, 5rem); }
+.lost-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: minmax(0, 1fr); column-gap: var(--gutter); row-gap: 2rem; align-items: center; }
+.lost-stage { grid-column: 1 / span 4; display: grid; justify-items: center; gap: 0.75rem; }
+.lost-svg { width: 100%; max-width: 30rem; height: auto; overflow: visible; touch-action: none; }
+.lost-stem { fill: var(--ink); }
+.lost-slot { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 2.4; }
+.lost-arm { fill: var(--red); cursor: grab; transform-box: fill-box; transform-origin: 50% 50%; }
+.lost-arm:active { cursor: grabbing; }
+.lost.is-fixed .lost-slot { opacity: 0; transition: opacity var(--t-ui) ease; }
+.lost-hint { font-weight: 600; }
+.lost-text { grid-column: 7 / span 6; display: grid; gap: 1.25rem; position: relative; z-index: 1; }
+.lost-code { line-height: 0.8; font-size: min(var(--step-giant), calc(50vw / 3.4)); }
+.lost-title { font-size: min(var(--step-head), calc(50vw / 14)); }
+.lost-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.lost-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; font-size: var(--step-body); }
+/* the lost student stands on the bottom edge of the field, between the broken sign and the way out */
+.lost-photo { grid-column: 5 / span 2; align-self: end; margin: 0 0 calc(-1 * clamp(2.5rem, 6vw, 5rem)); rotate: 2deg; transform-origin: 50% 100%; }
+.lost-cut { display: block; width: 100%; height: auto; max-height: calc(100svh - var(--bar) - 3rem); object-fit: contain; object-position: 50% 100%; }
+@media (max-width: 48rem) {
+  .lost-grid { grid-template-rows: none; }
+  .lost-stage, .lost-text { grid-column: 1 / -1; }
+  .lost-stage { order: 2; }
+  .lost-code { font-size: calc((100vw - 2 * var(--margin)) / 3.4); }
+  .lost-title { font-size: calc((100vw - 2 * var(--margin)) / 13); }
+  .lost-photo { grid-column: 1 / -1; order: 3; justify-self: end; width: 42%; }
+}

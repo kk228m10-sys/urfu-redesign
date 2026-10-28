@@ -1,0 +1,106 @@
+/* Карта кампуса */
+.finder-room { padding-block: clamp(3.5rem, 7vw, 6rem); }
+.room-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 2rem; align-items: start; }
+.room-side { grid-column: 1 / span 4; display: grid; gap: 1.5rem; min-width: 0; container-type: inline-size; }
+.room-side .sec-title { font-size: min(var(--step-head), calc(100cqi / 10.4)); }
+.room-field { display: block; }
+.room-field input { display: block; width: 100%; min-width: 0; min-height: 5.5rem; padding: 0 1.25rem; border: 0; background: var(--ink); color: var(--paper); font-family: var(--font-display); font-weight: 800; font-size: min(var(--step-head), calc(100cqi / 5)); letter-spacing: -0.03em; text-transform: uppercase; outline: none; }
+.room-field input::placeholder { color: #8a857a; }
+.room-field input:focus-visible { box-shadow: inset 0 0 0 4px var(--red); } /* taste-skill-ignore: focus ring */
+.room-try .link { font-size: inherit; }
+.room-result { min-height: 9rem; }
+.room-hint { color: var(--ink-soft); }
+.room-card { display: grid; gap: 0.35rem; padding: 1.25rem; background: var(--b, var(--red)); color: var(--b-ink, var(--red-ink)); }
+.room-card-photo { margin: -1.25rem -1.25rem 0.6rem; aspect-ratio: 16 / 9; overflow: hidden; }
+.room-card-photo img { height: 100%; }
+.room-card-title { font-size: var(--step-lead); font-weight: 600; }
+.room-card a { color: inherit; }
+.room-card.is-unknown { background: var(--yellow); color: var(--ink); }
+@media (prefers-reduced-motion: no-preference) { .room-card { animation: rise 320ms var(--ease-out) both; } }
+
+/* the plan keeps its own proportions: as tall as the screen allows, flush right, caption under it */
+.map { grid-column: 5 / span 8; margin: 0; display: grid; justify-content: end; container-type: inline-size; }
+.room-card-where { font-weight: 600; }
+
+.map .plan { width: auto; max-width: 100cqi; height: min(calc(100svh - var(--bar) - 6rem), calc(100cqi * 924 / 860)); aspect-ratio: 860 / 924; }
+.map-note { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; width: 0; min-width: 100%; margin-top: 0.85rem; color: var(--ink-soft); }
+.map-key { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--ink); }
+.map-key svg { width: 1.6rem; height: 1rem; flex: none; }
+.map-key svg[viewBox^='0 0 40'] { width: 3.2rem; }
+.map-key-case { fill: var(--ink); }
+.map-key-link { fill: var(--map-link); }
+/* the buildings land one after another when the plan comes into view; a building lifts under the pointer */
+@media (prefers-reduced-motion: no-preference) {
+  .js .map[data-reveal] { opacity: 1; transform: none; }
+  .js .map:not(.is-in) .plan-b { opacity: 0; }
+  .js .map.is-in .plan-b { animation: plan-in 650ms var(--ease-out) backwards; animation-delay: calc(var(--i) * 60ms + 150ms); }
+  .plan-b:hover, .plan-b:focus-visible { translate: 0 -5px; }
+}
+@keyframes plan-in { from { opacity: 0; translate: 0 18px; } }
+
+/* ---------- the code taken apart ---------- */
+.anatomy { padding-block: clamp(4rem, 9vw, 8rem); overflow: clip; }
+.anatomy-code { font-size: var(--step-giant); line-height: 0.85; white-space: nowrap; }
+.anatomy-code span[data-part] { display: inline-block; }
+.anatomy-code [data-part='0'] { color: var(--red); }
+.anatomy-code [data-part='1'] { color: var(--yellow); }
+.anatomy-code [data-part='2'] { color: var(--green); }
+.anatomy-dash { color: var(--black-ink); }
+.anatomy-parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); margin-top: clamp(2rem, 4vw, 3rem); font-size: var(--step-lead); line-height: 1.35; }
+.anatomy-key { display: block; font-family: var(--font-display); font-weight: 800; font-size: var(--step-head); line-height: 1; margin-bottom: 0.5rem; }
+.anatomy-parts li:nth-child(1) .anatomy-key { color: var(--red); }
+.anatomy-parts li:nth-child(2) .anatomy-key { color: var(--yellow); }
+.anatomy-parts li:nth-child(3) .anatomy-key { color: var(--green); }
+
+/* ---------- buildings ---------- */
+.blocks-lead { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 2rem; align-items: start; margin-bottom: clamp(3rem, 6vw, 5rem); }
+.blocks-intro { grid-column: 1 / span 6; max-width: 60ch; font-size: var(--step-lead); line-height: 1.45; }
+.blocks-photos { grid-column: 8 / -1; display: grid; grid-template-columns: 7fr 5fr; gap: var(--gutter); align-items: end; }
+.blocks-photo { margin: 0; overflow: hidden; aspect-ratio: 4 / 5; rotate: -2deg; }
+.blocks-photo + .blocks-photo { aspect-ratio: 1; rotate: 3deg; margin-bottom: -2rem; }
+.blocks-photo img { height: 100%; }
+.blocks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem var(--gutter); }
+.block { display: grid; align-content: start; gap: 0.5rem; }
+/* the card: the building's photograph with its piece of the plan pasted on, the letter as a colour key */
+.block-pic { position: relative; margin: 0 0 0.75rem; aspect-ratio: 4 / 3; overflow: hidden; background: var(--map-ground); }
+.block-pic > img { height: 100%; }
+.block-loc { position: absolute; inset: 0; display: block; }
+.block-loc .plan { height: 100%; }
+.block-pic.has-photo { overflow: visible; }
+.block-pic.has-photo > img { position: absolute; inset: 0; }
+.block-pic.has-photo .block-loc { inset: auto -0.6rem -0.9rem auto; width: 46%; aspect-ratio: 4 / 3; border: 5px solid var(--b); rotate: -3deg; }
+.block-code { display: flex; align-items: baseline; gap: 0.75rem; margin-top: 0.6rem; }
+.block-chip { display: inline-block; padding: 0.1em 0.28em 0.04em; background: var(--b); color: var(--b-ink); font-size: var(--step-head); line-height: 1; }
+.block-chip-far { padding: 0; background: none; color: var(--ink); }
+.block-gem { font-size: var(--step-ui); color: var(--ink-soft); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .block-pic.has-photo .block-loc { transition: rotate 400ms var(--ease-out); }
+  .block:hover .block-pic.has-photo .block-loc { rotate: 0deg; }
+}
+.block-name { font-size: var(--step-lead); font-weight: 600; line-height: 1.25; }
+.block-meta { font-weight: 600; }
+.block-show { justify-self: start; display: inline-flex; align-items: center; gap: 0.4rem; font-size: var(--step-ui); }
+.block-show svg { width: 1em; height: 1em; }
+.block:target { outline: 4px solid var(--b, var(--red)); outline-offset: 0.75rem; }
+
+/* ---------- new campus ---------- */
+.newcampus { display: grid; grid-template-columns: 7fr 5fr; min-height: 70svh; }
+.newcampus-photo { position: relative; margin: 0; overflow: hidden; }
+.newcampus-photo img { height: 100%; }
+.newcampus-text { display: grid; align-content: center; gap: 1.5rem; padding: clamp(2.5rem, 5vw, 4.5rem) var(--margin); }
+.newcampus-text .btn { justify-self: start; }
+
+@media (max-width: 48rem) {
+  .room-side, .map { grid-column: 1 / -1; }
+  .map { margin-inline: calc(var(--margin) * -1); }
+  .map-note { padding-inline: var(--margin); }
+  .plan-name { font-size: 26px; }
+  .plan-name.is-minor { display: none; }
+  .plan-code.is-small { font-size: calc(var(--s) * 1.35px); }
+  .blocks-intro, .blocks-photos { grid-column: 1 / -1; }
+  .room-side { position: static; }
+  .anatomy-parts { grid-template-columns: 1fr; }
+  .blocks { grid-template-columns: 1fr; }
+  .newcampus { grid-template-columns: 1fr; }
+  .newcampus-photo { aspect-ratio: 4 / 3; }
+}

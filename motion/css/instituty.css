@@ -1,0 +1,15 @@
+/* Страницы институтов — the template; institut.css gives the sign in the head, the hero photograph
+   and the poster of words, plan.css the piece of the plan. */
+.dir-line { display: block; padding: 0.6rem var(--margin); }
+.ii-more { margin-top: 1.5rem; max-width: 64ch; font-size: var(--step-body); }
+.ii-place-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 2.5rem; align-items: start; }
+.ii-place-text { grid-column: 1 / span 6; display: grid; gap: 1.25rem; align-content: start; }
+.ii-address { font-size: var(--step-head); line-height: 1; }
+.ii-phone { font-size: var(--step-lead); }
+.ii-plan { grid-column: 8 / -1; margin: 0; rotate: 2deg; }
+.ii-plan .plan { height: auto; border: 6px solid var(--b); }
+.ii-plan figcaption { margin-top: 0.75rem; color: var(--ink-soft); }
+@media (max-width: 48rem) {
+  .ii-place-text, .ii-plan { grid-column: 1 / -1; }
+  .ii-plan { rotate: none; }
+}
